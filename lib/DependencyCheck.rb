@@ -1,9 +1,14 @@
 
 class DependencyCheck
 
-  def self.checkIfInstallCarthage
+  def self.carthage?
 
     out = `carthage`
+    return DependencyCheck.checkIfInstallCarthage(out)
+
+  end
+
+  def self.checkIfInstallCarthage(out)
 
     if (out =~ /\w*\W*\s*command not found\s*\w*\W*/)
       return false
@@ -12,6 +17,5 @@ class DependencyCheck
     end
 
   end
-
 
 end

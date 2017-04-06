@@ -1,17 +1,5 @@
-require "./CarthagePods/version"
-require './DependencyCheck'
-
-
-
+require "CarthagePods/version"
 
 module CarthagePods
-
-
-  puts DependencyCheck.checkIfInstallCarthage()
-
-
+  # Your code goes here...
 end
-
-
-
-
