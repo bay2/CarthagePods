@@ -2,20 +2,29 @@
 class DependencyCheck
 
   def self.carthage?
-
-    out = `carthage`
-    return DependencyCheck.checkIfInstallCarthage(out)
-
+    checkComponent 'carthage'
   end
 
-  def self.checkIfInstallCarthage(out)
+  def self.cocoapods?
+    checkComponent 'pod'
+  end
 
-    if (out =~ /\w*\W*\s*command not found\s*\w*\W*/)
-      return false
-    else
-      return true
+  def self.checkComponent(name)
+
+    exts = ENV['PATH'] ? ENV['PATH'].split(':') : ['']
+
+    exts.each do |path|
+
+      ext = "#{path}/#{name}"
+      if File.executable?(ext) && !File.directory?(ext)
+        return true
+      end
+
     end
 
+    return false
+
   end
+
 
 end
