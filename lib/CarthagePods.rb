@@ -91,6 +91,7 @@ module CarthagePods
       CarthageManage.install(arg)
 
       CocoaPodsManage.generatePodspec()
+      CocoaPodsManage.cocoaPodsInstall
 
     end
 
