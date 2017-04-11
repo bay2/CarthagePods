@@ -28,9 +28,6 @@ describe 'CPodManage' do
   end
 
   after() do
-
-    puts '================================================='
-
     cpodManage.deleteCPodfile
 
   end

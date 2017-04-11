@@ -87,10 +87,14 @@ module CarthagePods
 
       carthageManage = CarthageManage.new
       cocoaPodsManage = CocoaPodsManage.new
+      cpodManage =  CPodManage.new
 
       carthageArg[:platform] = "platform #{platformType[cocoaPodsManage.getPlatformType]}"
 
+
       carthageManage.install carthageArg
+
+      cpodManage.deleteFilterFramework cocoaPodsManage.platformToCarthagePath(cocoaPodsManage.getPlatformType)
 
       cocoaPodsManage.generatePodspec
       cocoaPodsManage.cocoaPodsInstall cocoapodsArg

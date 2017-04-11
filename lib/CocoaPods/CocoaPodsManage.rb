@@ -133,7 +133,7 @@ end
           next
         end
 
-        if (line =~ /^\s*end\s*$/)
+        if (line =~ /^\s*end\s*$/) && targetNum > 0
 
           targetNum -= 1
 

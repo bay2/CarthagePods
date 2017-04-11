@@ -37,7 +37,88 @@ end
 
 end
 
+def podfileTest2Tmp
+
+  <<-SPEC
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+source 'https://git.coding.net/sim_cai/simSpecs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
+def ThreeThingsPod
+
+  pod 'IBAnimatable', '~> 3.1.1'
+  pod 'FSCalendar', '~> 2.7.1'
+
+end
+
+use_frameworks!
+
+target 'ThreeThingsBeta' do
+
+  ThreeThingsPod()
+
+  target 'ThreeThingsBetaTests' do
+      pod 'Quick', '~> 1.1.0'
+      pod 'Nimble', '~> 6.0.1'
+  end
+
+
+end
+
+target 'ThreeThings' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  ThreeThingsPod()
+
+end
+  SPEC
+
+end
+
+def podfileTest2ExpectTmp
+
+  <<-SPEC
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+source 'https://git.coding.net/sim_cai/simSpecs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
+def ThreeThingsPod
+
+  pod 'IBAnimatable', '~> 3.1.1'
+  pod 'FSCalendar', '~> 2.7.1'
+
+end
+
+use_frameworks!
+
+target 'ThreeThingsBeta' do
+
+  ThreeThingsPod()
+
+  target 'ThreeThingsBetaTests' do
+      pod 'Quick', '~> 1.1.0'
+      pod 'Nimble', '~> 6.0.1'
+  end
+
+
+pod 'CarthagePods', :path => './'
+end
+
+target 'ThreeThings' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  ThreeThingsPod()
+
+pod 'CarthagePods', :path => './'
+end
+  SPEC
+
+
+end
+
 describe 'getPlatformVersion' do
+
+  let(:cocoaManage) { CarthagePods::CocoaPodsManage.new }
 
 
   it 'comment line' do
@@ -50,11 +131,7 @@ describe 'getPlatformVersion' do
     podfile.write(initPodFile)
     podfile.close()
 
-
-
-    manage = CarthagePods::CocoaPodsManage.new
-
-    relust = manage.getPlatformVersion
+    relust = cocoaManage.getPlatformVersion
 
     expect(relust).to eq "'9.0'"
 
@@ -71,9 +148,7 @@ describe 'getPlatformVersion' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    relust = manage.getPlatformVersion
+    relust = cocoaManage.getPlatformVersion
 
     expect(relust).to start_with("'8.0'").and end_with("'8.0'")
 
@@ -82,6 +157,8 @@ describe 'getPlatformVersion' do
 end
 
 describe 'insertCarthagePods' do
+
+  let(:cocoaManage) { CarthagePods::CocoaPodsManage.new }
 
   it 'single target' do
 
@@ -101,15 +178,11 @@ target 'test' do
 pod 'CarthagePods', :path => './'
 end
 "
-
-
-
     podfile = File.new('Podfile', 'w+')
     podfile.write(initPodFile)
     podfile.close
 
-    manage = CarthagePods::CocoaPodsManage.new
-    manage.insertCarthagePods
+    cocoaManage.insertCarthagePods
 
     newPodfile = ""
     podfile = File.new('Podfile', 'r')
@@ -164,9 +237,7 @@ end"
     podfile.write(initPodFile)
     podfile.close
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    manage.insertCarthagePods
+    cocoaManage.insertCarthagePods
 
     newPodfile = ""
     podfile = File.new('Podfile', 'r')
@@ -233,9 +304,7 @@ end"
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    manage.insertCarthagePods
+    cocoaManage.insertCarthagePods
 
     newPodfile = ""
     podfile = File.new('Podfile', 'r')
@@ -306,9 +375,7 @@ end"
     podfile.write(initPodFile)
     podfile.close
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    manage.insertCarthagePods()
+    cocoaManage.insertCarthagePods()
 
     newPodfile = ""
     podfile = File.new('Podfile', 'r')
@@ -325,10 +392,50 @@ end"
 
   end
 
+  context "ThreeThing Podfile" do
+
+    it {
+
+      podfileinit = podfileTest2Tmp
+      expectPodfile = podfileTest2ExpectTmp
+
+      podfile = File.new('Podfile', 'w+')
+      podfile.write(podfileinit)
+      podfile.close()
+
+      cocoaManage.insertCarthagePods
+      podfileinit = podfileTest2Tmp
+      expectPodfile = podfileTest2ExpectTmp
+
+      podfile = File.new('Podfile', 'w+')
+      podfile.write(podfileinit)
+      podfile.close()
+
+      cocoaManage.insertCarthagePods
+
+      newPodfile = ""
+      podfile = File.new('Podfile', 'r')
+
+      lines = podfile.readlines
+
+      for line in lines
+        newPodfile += line
+      end
+
+      podfile.close
+
+      expect(expectPodfile).to eq(newPodfile)
+
+    }
+
+  end
+
 
 end
 
 describe 'reductionPodfile' do
+
+  let(:cocoaManage) { CarthagePods::CocoaPodsManage.new }
 
   it 'reduction podfile' do
 
@@ -358,10 +465,8 @@ end"
     podfile.write(initPodFile)
     podfile.close
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    manage.insertCarthagePods
-    manage.reductionPodfile
+    cocoaManage.insertCarthagePods
+    cocoaManage.reductionPodfile
 
     newPodfile = ""
     podfile = File.new('Podfile', 'r')
@@ -382,6 +487,8 @@ end
 
 describe 'getPlatformType' do
 
+  let(:cocoaManage) { CarthagePods::CocoaPodsManage.new }
+
   it 'comment line' do
 
     data = {}
@@ -392,9 +499,7 @@ describe 'getPlatformType' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    relust = manage.getPlatformType
+    relust = cocoaManage.getPlatformType
 
     expect(relust).to eq "ios"
 
@@ -410,9 +515,7 @@ describe 'getPlatformType' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    relust = manage.getPlatformType
+    relust = cocoaManage.getPlatformType
 
     expect(relust).to eq "ios"
 
@@ -428,9 +531,8 @@ describe 'getPlatformType' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
 
-    relust = manage.getPlatformType
+    relust = cocoaManage.getPlatformType
 
     expect(relust).to eq "osx"
 
@@ -446,9 +548,7 @@ describe 'getPlatformType' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    relust = manage.getPlatformType
+    relust = cocoaManage.getPlatformType
 
     expect(relust).to eq "tvos"
 
@@ -464,9 +564,7 @@ describe 'getPlatformType' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-
-    relust = manage.getPlatformType
+    relust = cocoaManage.getPlatformType
 
     expect(relust).to eq "watchos"
 
@@ -475,6 +573,8 @@ describe 'getPlatformType' do
 end
 
 describe 'generatePodspec' do
+
+  let(:cocoaManage) { CarthagePods::CocoaPodsManage.new }
 
   it 'comment line' do
 
@@ -486,8 +586,7 @@ describe 'generatePodspec' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-    manage.generatePodspec
+    cocoaManage.generatePodspec
     podspecText = ""
     podspec = File.new 'CarthagePods.podspec', 'r'
     lines = podspec.readlines
@@ -513,8 +612,7 @@ describe 'generatePodspec' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-    manage.generatePodspec
+    cocoaManage.generatePodspec
     podspecText = ""
     podspec = File.new 'CarthagePods.podspec', 'r'
     lines = podspec.readlines
@@ -540,8 +638,7 @@ describe 'generatePodspec' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-    manage.generatePodspec
+    cocoaManage.generatePodspec
     podspecText = ""
     podspec = File.new 'CarthagePods.podspec', 'r'
     lines = podspec.readlines
@@ -567,8 +664,7 @@ describe 'generatePodspec' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-    manage.generatePodspec
+    cocoaManage.generatePodspec
     podspecText = ""
     podspec = File.new 'CarthagePods.podspec', 'r'
     lines = podspec.readlines
@@ -594,8 +690,7 @@ describe 'generatePodspec' do
     podfile.write(initPodFile)
     podfile.close()
 
-    manage = CarthagePods::CocoaPodsManage.new
-    manage.generatePodspec
+    cocoaManage.generatePodspec
     podspecText = ""
     podspec = File.new 'CarthagePods.podspec', 'r'
     lines = podspec.readlines
@@ -611,19 +706,15 @@ describe 'generatePodspec' do
 
   end
 
-
-
-
-
 end
 
 describe 'platformToCarthagePath' do
 
-  manage = CarthagePods::CocoaPodsManage.new
+  let(:cocoaManage) { CarthagePods::CocoaPodsManage.new }
 
   it 'osx' do
 
-    relust = manage.platformToCarthagePath 'osx'
+    relust = cocoaManage.platformToCarthagePath 'osx'
 
     expect(relust).to eq('Mac')
 
@@ -631,7 +722,7 @@ describe 'platformToCarthagePath' do
 
   it 'ios' do
 
-    relust = manage.platformToCarthagePath 'ios'
+    relust = cocoaManage.platformToCarthagePath 'ios'
 
     expect(relust).to eq('iOS')
 
@@ -639,7 +730,7 @@ describe 'platformToCarthagePath' do
 
   it 'tvos' do
 
-    relust = manage.platformToCarthagePath 'tvos'
+    relust = cocoaManage.platformToCarthagePath 'tvos'
 
     expect(relust).to eq('tvOS')
 
@@ -647,7 +738,7 @@ describe 'platformToCarthagePath' do
 
   it 'watchos' do
 
-    relust = manage.platformToCarthagePath 'watchos'
+    relust = cocoaManage.platformToCarthagePath 'watchos'
 
     expect(relust).to eq('watchOS')
 

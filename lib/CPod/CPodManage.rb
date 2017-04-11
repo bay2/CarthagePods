@@ -23,6 +23,20 @@ module CarthagePods
       File.delete'CPodfile'
     end
 
+    def deleteFilterFramework(platformPath)
+
+      require 'CPod/EvalFilterFramework'
+
+      $filterHash_value.each_value do |value|
+
+        path = "Carthage/Build/#{platformPath}/#{value}"
+
+        `rm -rf #{path}`
+
+      end
+
+    end
+
   end
 
 end
