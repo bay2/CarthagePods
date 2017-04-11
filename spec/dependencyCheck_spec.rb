@@ -1,5 +1,5 @@
 require "spec_helper"
-require 'DependencyCheck'
+require 'ENV/DependencyCheck'
 
 describe 'My behaviour' do
 

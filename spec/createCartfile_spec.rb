@@ -1,6 +1,6 @@
 require "spec_helper"
-require 'CarthagePods'
-require 'CarthageManage'
+require 'CocoaPods/CocoaPodsManage'
+require 'Carthage/CarthageManage'
 
 describe 'create a cartfile' do
 
@@ -8,7 +8,9 @@ describe 'create a cartfile' do
 
     'rm -rf Cartfile'
 
-    CarthageManage.createCartfile()
+    manage = CarthagePods::CarthageManage.new
+
+    manage.createCartfile()
     reslut = File.exist? 'Cartfile'
 
     expect(reslut).to eq(true)

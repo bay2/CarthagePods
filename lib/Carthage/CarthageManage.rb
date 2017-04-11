@@ -1,10 +1,16 @@
 require 'tty-command'
 
-class CarthageManage
+module CarthagePods
 
-  def self.createCartfile
 
-    cartfile = '# Require version 2.3.1 or later
+
+  class CarthageManage
+
+
+
+    def createCartfile
+
+      cartfile = '# Require version 2.3.1 or later
 # github "ReactiveCocoa/ReactiveCocoa" >= 2.3.1
 
 # Require version 1.x
@@ -31,33 +37,36 @@ class CarthageManage
 # A binary only framework
 # binary "https://my.domain.com/release/MyFramework.json" ~> 2.3'
 
-    if File.exist?('Cartfile')
-      return
+      if File.exist?('Cartfile')
+        return
+      end
+
+      cartAFile = File.new('Cartfile', 'w')
+
+      cartAFile.write cartfile
+
+      cartAFile.close
+
     end
 
-    cartAFile = File.new('Cartfile', 'w')
+    def install(arg={})
 
-    cartAFile.write cartfile
+      cmdObj = TTY::Command.new
+      cmd = 'carthage bootstrap'
 
-    cartAFile.close
+      arg.each_value do |value|
+        cmd += " --#{value}"
+      end
 
-  end
+      cmdObj.run cmd
 
-  def self.install(arg={})
-
-    cmdObj = TTY::Command.new
-    cmd = 'carthage bootstrap'
-
-    arg.each_value do |value|
-      cmd += " --#{value}"
     end
 
-    cmdObj.run cmd
+
+
+
 
   end
-
-
-
-
 
 end
+

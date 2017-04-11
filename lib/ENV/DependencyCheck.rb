@@ -26,5 +26,21 @@ class DependencyCheck
 
   end
 
+  def self.checkEnv
+
+    if !DependencyCheck.carthage?
+
+      puts "Please install the Carhage. Uset commend \'sudo brew install carthage\'"
+
+    end
+
+    if !DependencyCheck.cocoapods?
+
+      puts "Please install the Carhage. Uset commend \'sudo brew install carthage\'"
+
+    end
+
+  end
+
 
 end
