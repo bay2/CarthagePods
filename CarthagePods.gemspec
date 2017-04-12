@@ -23,9 +23,7 @@ Gem::Specification.new do |spec|
 #      "public gem pushes."
 #  end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
+  spec.files         = Dir["lib/**/*.rb"] + %w{exe/carthagePods LICENSE README.md}
   spec.bindir        = "exe"
   spec.executables   = %w{ carthagePods }
   spec.require_paths = ["lib"]
@@ -33,9 +31,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "clamp"
-  spec.add_development_dependency "tty-command"
-  spec.add_development_dependency "cocoapods"
+  spec.add_development_dependency "clamp", "~> 1.1"
+  spec.add_development_dependency "tty-command", "~> 0.4"
+  spec.add_development_dependency "cocoapods", "~> 1.2"
 
 
 end
