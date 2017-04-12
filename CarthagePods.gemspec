@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["蔡学敏"]
   spec.email         = ["382499488@qq.com"]
 
-  spec.summary       = "aaaa"
-  spec.description   = "bbbbb"
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "A simple, decentralized dependency manager for Cocoa"
+  spec.description   = "A simple, decentralized dependency manager for Cocoa"
+  spec.homepage      = "https://github.com/bay2/CarthagePods"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -27,10 +27,15 @@ Gem::Specification.new do |spec|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables   = %w{ carthagePods }
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "clamp"
+  spec.add_development_dependency "tty-command"
+  spec.add_development_dependency "cocoapods"
+
+
 end
