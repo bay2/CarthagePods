@@ -1,8 +1,10 @@
 require 'tty-command'
+require 'DependencyManagerTools/ToolsManger'
+
 
 module CarthagePods
 
-  class CocoaPodsManage
+  class CocoaPodsManage < ToolsManger
 
     def platformToCarthagePath(type)
 
@@ -169,21 +171,27 @@ end
 
     end
 
-    def cocoaPodsInstall(arg={})
+    def install(arg={})
 
       insertCarthagePods
 
       cmdObj = TTY::Command.new
-      cmd = 'pod install'
 
-      arg.each_value do |value|
-        cmd += " --#{value}"
-      end
-
+      cmd = argMarge('pod install', arg)
 
       cmdObj.run cmd
 
       reductionPodfile
+
+    end
+
+    def update(arg={})
+
+      cmdObj = TTY::Command.new
+
+      cmd = argMarge('pod update', arg)
+
+      cmdObj.run cmd
 
     end
 

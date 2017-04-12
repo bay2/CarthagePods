@@ -1,10 +1,9 @@
 require 'tty-command'
+require 'DependencyManagerTools/ToolsManger'
 
 module CarthagePods
 
-
-
-  class CarthageManage
+  class CarthageManage < ToolsManger
 
 
 
@@ -52,18 +51,22 @@ module CarthagePods
     def install(arg={})
 
       cmdObj = TTY::Command.new
-      cmd = 'carthage bootstrap'
 
-      arg.each_value do |value|
-        cmd += " --#{value}"
-      end
+      cmd = argMarge('carthage bootstrap', arg)
 
       cmdObj.run cmd
 
     end
 
+    def update(arg={})
 
+      cmdObj = TTY::Command.new
 
+      cmd = argMarge('carthage update', arg)
+
+      cmdObj.run cmd
+
+    end
 
 
   end

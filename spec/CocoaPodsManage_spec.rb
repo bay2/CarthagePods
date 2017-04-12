@@ -1,5 +1,5 @@
 require "spec_helper"
-require 'Carthage/CarthageManage'
+require 'DependencyManagerTools/Carthage/CarthageManage'
 
 def podfileTestTmp(data)
   <<-SPEC

@@ -1,6 +1,6 @@
 require "spec_helper"
-require 'CocoaPods/CocoaPodsManage'
-require 'Carthage/CarthageManage'
+require 'DependencyManagerTools/CocoaPods/CocoaPodsManage'
+require 'DependencyManagerTools/Carthage/CarthageManage'
 
 describe 'create a cartfile' do
 
