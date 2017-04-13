@@ -1,10 +1,10 @@
 # CarthagePods
 
-The Cocoa dependency manager. The Use of [CocoaPods](https://github.com/CocoaPods/CocoaPods) and [Carthage](https://github.com/Carthage/Carthage) dependency manager on together.
+The Cocoa dependency manager. The integrated use of [CocoaPods](https://github.com/CocoaPods/CocoaPods) and [Carthage](https://github.com/Carthage/Carthage) dependency manager.
 
 ## Installation
 
-First installing `Carthage`, detailed [see](https://github.com/Carthage/Carthage#installing-carthage).
+First installing `Carthage`. [See Details](https://github.com/Carthage/Carthage#installing-carthage).
 
 Add this line to your application's Gemfile:
 
@@ -23,10 +23,10 @@ Or install it yourself as:
 ## Usage
 
 
-* Run `carthagePods init` in your project directory. Your project directory in generate `Podfile`,`Cartfile`,`CPodfile` .
-* If you want to use `CocoaPods` manager dependencies between libraries . You can edit `Podfile` add your dependencies. [Detailed see](https://guides.cocoapods.org/using/using-cocoapods.html).
-* If you want to use `Carthage` manager dependencies and compile framework. You can edit `Cartfile` add your dependencies. [Detailed see](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
-* `CarthagePods` `Carthage` compile framework will be packaged into a `pod lib`. `CPodfile` provides a method of filtering framework.
+* Run `carthagePod init` in your project directory to generate `Podfile`,`Cartfile`,`CPodfile` .
+* If you want to use `CocoaPods` manager dependencies between libraries ，you can edit `Podfile` to add your dependencies. [See Details](https://guides.cocoapods.org/using/using-cocoapods.html).
+* If you want to use `Carthage` manager dependencies and compile framework. You can edit `Cartfile` to add your dependencies. [See Details](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
+* `CarthagePods` packages frameworks complied by `Carthage` into a `Pod lib`. `CPodfile` provides a method of filtering framework.
 
 ```
 filterFramework ['RxTest.framework', 'RxBlocking.framework']
