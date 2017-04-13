@@ -1,4 +1,4 @@
-
+require 'pastel'
 class DependencyCheck
 
   def self.carthage?
@@ -29,15 +29,13 @@ class DependencyCheck
   def self.checkEnv
 
     if !DependencyCheck.carthage?
-
-      puts "Please install the Carhage. Uset commend \'sudo brew install carthage\'"
-
+      pastel =  Pastel.new
+      puts pastel.red('[Error] Please install the Carhage. Use commend') + pastel.green(" [sudo] brew install carthage")
     end
 
     if !DependencyCheck.cocoapods?
-
-      puts "Please install the Carhage. Uset commend \'sudo brew install carthage\'"
-
+      pastel =  Pastel.new
+      puts pastel.red('[Error] Please install the Cocoapods. Use commend') + pastel.green(" [sudo] gem install cocoapods")
     end
 
   end

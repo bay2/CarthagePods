@@ -1,8 +1,10 @@
 # CarthagePods
 
-The Cocoa dependency manager. use CocoaPods and 
+The Cocoa dependency manager. The Use of [CocoaPods](https://github.com/CocoaPods/CocoaPods) and [Carthage](https://github.com/Carthage/Carthage) dependency manager on together.
 
 ## Installation
+
+First installing `Carthage`, detailed [see](https://github.com/Carthage/Carthage#installing-carthage).
 
 Add this line to your application's Gemfile:
 
@@ -20,7 +22,18 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+* Run `carthagePods init` in your project directory. Your project directory in generate `Podfile`,`Cartfile`,`CPodfile` .
+* If you want to use `CocoaPods` manager dependencies between libraries . You can edit `Podfile` add your dependencies. [Detailed see](https://guides.cocoapods.org/using/using-cocoapods.html).
+* If you want to use `Carthage` manager dependencies and compile framework. You can edit `Cartfile` add your dependencies. [Detailed see](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
+* `CarthagePods` `Carthage` compile framework will be packaged into a `pod lib`. `CPodfile` provides a method of filtering framework.
+
+```
+filterFramework ['RxTest.framework', 'RxBlocking.framework']
+```
+
+* Run `carthagePods install` in your project directory.
+* Open `App.xcworkspace` and build.
 
 ## Development
 
@@ -30,7 +43,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/CarthagePods. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/bay2/CarthagePods. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
