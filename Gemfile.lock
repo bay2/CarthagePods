@@ -85,7 +85,7 @@ GEM
     tty-color (0.4.2)
     tty-command (0.4.0)
       pastel (~> 0.7.0)
-    tzinfo (1.2.3)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     xcodeproj (1.4.4)
       CFPropertyList (~> 2.3.3)
