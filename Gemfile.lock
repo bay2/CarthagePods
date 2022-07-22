@@ -66,7 +66,7 @@ GEM
     pastel (0.7.1)
       equatable (~> 0.5.0)
       tty-color (~> 0.4.0)
-    rake (13.0.1)
+    rake (13.0.6)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
